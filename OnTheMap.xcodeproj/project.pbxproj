@@ -7,21 +7,31 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4C349FFC1F711143008307E7 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C349FFB1F711143008307E7 /* MapKit.framework */; };
+		4C349FFE1F71A8B5008307E7 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C349FFD1F71A8B5008307E7 /* MapViewController.swift */; };
+		4C34A0001F71A8FC008307E7 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C349FFF1F71A8FC008307E7 /* ListViewController.swift */; };
 		4C4B61831F5A77070078990C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4B61821F5A77070078990C /* AppDelegate.swift */; };
-		4C4B61851F5A77070078990C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4B61841F5A77070078990C /* ViewController.swift */; };
+		4C4B61851F5A77070078990C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4B61841F5A77070078990C /* LoginViewController.swift */; };
 		4C4B61881F5A77070078990C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C4B61861F5A77070078990C /* Main.storyboard */; };
 		4C4B618A1F5A77070078990C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4C4B61891F5A77070078990C /* Assets.xcassets */; };
 		4C4B618D1F5A77070078990C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C4B618B1F5A77070078990C /* LaunchScreen.storyboard */; };
+		4C9102AF1F70EB4300CC9411 /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9102AE1F70EB4300CC9411 /* AppModel.swift */; };
+		4C9102B11F7104F000CC9411 /* StudentLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9102B01F7104F000CC9411 /* StudentLocation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4C349FFB1F711143008307E7 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		4C349FFD1F71A8B5008307E7 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		4C349FFF1F71A8FC008307E7 /* ListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		4C4B617F1F5A77070078990C /* OnTheMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnTheMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C4B61821F5A77070078990C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		4C4B61841F5A77070078990C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		4C4B61841F5A77070078990C /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		4C4B61871F5A77070078990C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4C4B61891F5A77070078990C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4C4B618C1F5A77070078990C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4C4B618E1F5A77070078990C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4C9102AE1F70EB4300CC9411 /* AppModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
+		4C9102B01F7104F000CC9411 /* StudentLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentLocation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,17 +39,27 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4C349FFC1F711143008307E7 /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4C349FFA1F711142008307E7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4C349FFB1F711143008307E7 /* MapKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		4C4B61761F5A77070078990C = {
 			isa = PBXGroup;
 			children = (
 				4C4B61811F5A77070078990C /* OnTheMap */,
 				4C4B61801F5A77070078990C /* Products */,
+				4C349FFA1F711142008307E7 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -55,8 +75,12 @@
 			isa = PBXGroup;
 			children = (
 				4C4B61821F5A77070078990C /* AppDelegate.swift */,
-				4C4B61841F5A77070078990C /* ViewController.swift */,
+				4C4B61841F5A77070078990C /* LoginViewController.swift */,
+				4C9102AE1F70EB4300CC9411 /* AppModel.swift */,
+				4C9102B01F7104F000CC9411 /* StudentLocation.swift */,
 				4C4B61861F5A77070078990C /* Main.storyboard */,
+				4C349FFD1F71A8B5008307E7 /* MapViewController.swift */,
+				4C349FFF1F71A8FC008307E7 /* ListViewController.swift */,
 				4C4B61891F5A77070078990C /* Assets.xcassets */,
 				4C4B618B1F5A77070078990C /* LaunchScreen.storyboard */,
 				4C4B618E1F5A77070078990C /* Info.plist */,
@@ -137,8 +161,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4C4B61851F5A77070078990C /* ViewController.swift in Sources */,
+				4C9102B11F7104F000CC9411 /* StudentLocation.swift in Sources */,
+				4C4B61851F5A77070078990C /* LoginViewController.swift in Sources */,
+				4C34A0001F71A8FC008307E7 /* ListViewController.swift in Sources */,
 				4C4B61831F5A77070078990C /* AppDelegate.swift in Sources */,
+				4C349FFE1F71A8B5008307E7 /* MapViewController.swift in Sources */,
+				4C9102AF1F70EB4300CC9411 /* AppModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -302,6 +330,7 @@
 				4C4B61931F5A77070078990C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
