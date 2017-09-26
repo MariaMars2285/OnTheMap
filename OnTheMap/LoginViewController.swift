@@ -25,7 +25,10 @@ class LoginViewController: UIViewController {
         
     }
   
-
+    @IBAction func signUpButton(_ sender: UIButton!) {
+        UIApplication.shared.openURL(URL(string: "http://www.udacity.com/account/auth#!/signup")!)
+    }
+    
     @IBAction func loginAction(_ sender: Any) {
         
         guard let email = emailField.text, let password = passwordField.text else {

@@ -14,6 +14,10 @@ class AppModel {
 
     public var userId: String!
     
+    public var firstName: String!
+    
+    public var lastName: String!
+    
     private var studentLocations: [StudentLocation] = []
     
     private init() { }
@@ -67,5 +71,9 @@ class AppModel {
     
     func getLocation(atIndex index: Int) -> StudentLocation {
         return studentLocations[index]
+    }
+    
+    func getLocations() -> [StudentLocation] {
+        return studentLocations
     }
 }
