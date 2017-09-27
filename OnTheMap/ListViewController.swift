@@ -11,12 +11,7 @@ import UIKit
 class ListViewController: BaseViewController {
     
     @IBOutlet weak var tableView: UITableView!
-        
-    override func viewDidLoad() {
-        if AppModel.instance.getCount() == 0 {
-            self.refresh(sender: nil)
-        }
-    }
+  
     
     override func refreshAnnotations() {
         self.tableView.reloadData()
@@ -50,5 +45,11 @@ extension ListViewController: UITableViewDataSource {
 }
 
 extension ListViewController: UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let location = AppModel.instance.getLocation(atIndex: indexPath.row)
+        if let mediaURLString = location.mediaUrl, let mediaURL = URL(string: mediaURLString) {
+            UIApplication.shared.open(mediaURL, options: [:], completionHandler: nil)
+        }
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
 }

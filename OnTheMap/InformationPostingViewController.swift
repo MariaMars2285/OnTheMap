@@ -54,25 +54,26 @@ class InformationPostingViewController: UIViewController {
                 self.activityIndicator.stopAnimating()
             }
             if error != nil {
-                UIAlertController.errorAlert(title: "Error", message: "Error. Please try again!")
+                let alert = UIAlertController.errorAlert(title: "Error", message: "Error. Please try again!")
+                self.present(alert, animated: true, completion: nil)
                 return
             }
             
             if placemarks == nil {
-                UIAlertController.errorAlert(title: "Placemark Error", message: "Placemark Error. Please try again!")
+                let alert = UIAlertController.errorAlert(title: "Placemark Error", message: "Placemark Error. Please try again!")
+                self.present(alert, animated: true, completion: nil)
                 return
             }
             
             let first = placemarks?.first
             
             if first == nil {
-                UIAlertController.errorAlert(title: "Empty Error", message: "Empty. Please try again later!")
+                let alert = UIAlertController.errorAlert(title: "Empty Error", message: "Empty. Please try again later!")
+                self.present(alert, animated: true, completion: nil)
                 return
             }
             
             self.placemark = first
-            print(self.placemark.location)
-            print(self.placemark.country)
             self.performSegue(withIdentifier: "InfoPostSegue", sender: nil)
         }
     }

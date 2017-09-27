@@ -25,6 +25,9 @@ class InformationPostingSecondViewController: UIViewController {
         let region = MKCoordinateRegion(center: coordinate!, span: coordinateSpan)
         self.mapView.setRegion(region, animated: true)
         
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = coordinate!
+        self.mapView.addAnnotation(annotation)
     }
     
     @IBAction func submitLink(_ sender: Any) {
@@ -36,8 +39,8 @@ class InformationPostingSecondViewController: UIViewController {
         postDict["longitude"] = coordinate!.longitude
         postDict["mediaURL"] = self.linkField.text
         postDict["mapString"] = self.mapString
-        postDict["firstName"] = "Maria"
-        postDict["lastName"] = "Selvam"
+        postDict["firstName"] = AppModel.instance.firstName
+        postDict["lastName"] = AppModel.instance.lastName
         postDict["uniqueKey"] = AppModel.instance.userId
         
         if let jsonData = try? JSONSerialization.data(withJSONObject: postDict, options: .prettyPrinted) {
@@ -61,22 +64,16 @@ class InformationPostingSecondViewController: UIViewController {
 extension InformationPostingSecondViewController: MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        if let annotation = annotation as? LocationAnnotation {
-            let identifier = "StudentLocationPin"
-            var view: MKPinAnnotationView
-            if let dequeuedView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
-                as? MKPinAnnotationView { // 2
-                dequeuedView.annotation = annotation
-                view = dequeuedView
-            } else {
-                // 3
-                view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
-                view.canShowCallout = true
-                view.calloutOffset = CGPoint(x: -5, y: 5)
-            }
-            return view
+        let identifier = "StudentLocationPin"
+        var view: MKPinAnnotationView
+        if let dequeuedView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
+            as? MKPinAnnotationView {
+            dequeuedView.annotation = annotation
+            view = dequeuedView
+        } else {
+            view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+            view.canShowCallout = true
         }
-        return nil
-        
+        return view
     }
 }

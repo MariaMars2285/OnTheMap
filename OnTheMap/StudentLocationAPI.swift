@@ -101,7 +101,7 @@ class StudentLocationAPI {
     
     
     func fetchLocations(completionHandler: (([StudentLocation]?, Error? ) -> Void)?) {
-        let request = getRequest(url: "https://parse.udacity.com/parse/classes/StudentLocation")
+        let request = getRequest(url: "https://parse.udacity.com/parse/classes/StudentLocation?limit=100&order=-updatedAt")
         let session = URLSession.shared
         let task = session.dataTask(with: request as URLRequest) { data, response, error in
             if error != nil { // Handle error
@@ -136,6 +136,32 @@ class StudentLocationAPI {
                 return
             }
             completionHandler(true)
+        }
+        task.resume()
+    }
+    
+    func getUserDetails(userId: String, completionHandler: (([String: Any]?) -> Void)?) {
+        let request = NSMutableURLRequest(url: URL(string: "https://www.udacity.com/api/users/\(userId)")!)
+        let session = URLSession.shared
+        let task = session.dataTask(with: request as URLRequest) { data, response, error in
+            if error != nil { // Handle error...
+                return
+            }
+            let range = Range(5..<data!.count)
+            let newData = data?.subdata(in: range) /* subset response data! */
+            if newData == nil {
+                completionHandler?(nil)
+                return
+            }
+            var json: Any?
+            
+            do {
+                json = try JSONSerialization.jsonObject(with: newData!)
+            } catch {
+                completionHandler?(nil)
+            }
+            completionHandler?(json as? [String: Any])
+            print(NSString(data: newData!, encoding: String.Encoding.utf8.rawValue)!)
         }
         task.resume()
     }

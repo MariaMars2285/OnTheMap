@@ -12,7 +12,11 @@ class AppModel {
     
     static let instance = AppModel()
 
-    public var userId: String!
+    public var userId: String! {
+        didSet {
+            fetchUserDetails()
+        }
+    }
     
     public var firstName: String!
     
@@ -46,5 +50,15 @@ class AppModel {
     
     func getLocations() -> [StudentLocation] {
         return studentLocations
+    }
+    
+    func fetchUserDetails() {
+        StudentLocationAPI().getUserDetails(userId: userId) { (dataDict) in
+            if let dict = dataDict, let userDict = dict["user"] as? [String: Any] {
+                print("test---- \(userDict)")
+                self.firstName = userDict["first_name"] as! String
+                self.lastName = userDict["last_name"] as! String
+            }
+        }
     }
 }
