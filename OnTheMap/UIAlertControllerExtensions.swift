@@ -10,6 +10,7 @@ import UIKit
 
 extension UIAlertController {
     
+    // Static function for creating Common Error Alert.
     static func errorAlert(title: String, message: String) -> UIAlertController {
         
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)

@@ -15,6 +15,7 @@ class MapViewController: BaseViewController {
             
     var annotations: [LocationAnnotation] = []
     
+    // Adds annotations according to the student location data.
     func addAnnotations() {
         self.mapView.removeAnnotations(annotations)
         annotations.removeAll()
@@ -33,7 +34,7 @@ class MapViewController: BaseViewController {
 }
 
 extension MapViewController: MKMapViewDelegate {
-    
+
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         if let annotation = annotation as? LocationAnnotation {
             let identifier = "StudentLocationPin"

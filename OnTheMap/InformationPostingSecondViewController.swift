@@ -30,6 +30,7 @@ class InformationPostingSecondViewController: UIViewController {
         self.mapView.addAnnotation(annotation)
     }
     
+    
     @IBAction func submitLink(_ sender: Any) {
         self.activityIndicator.startAnimating()
        
@@ -49,6 +50,7 @@ class InformationPostingSecondViewController: UIViewController {
         }
     }
     
+    // Submit the link to the server and on success dismisses the navigation controller.
     func addLocation(_ data: Data) {
         StudentLocationAPI().addLocation(data) { (succeeded) in
             DispatchQueue.main.async {

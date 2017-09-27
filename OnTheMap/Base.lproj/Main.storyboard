@@ -91,7 +91,7 @@
                                                 <rect key="frame" x="184.5" y="0.0" width="60" height="50"/>
                                                 <state key="normal" title="Sign Up"/>
                                                 <connections>
-                                                    <action selector="signUpButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="1wD-iJ-EfD"/>
+                                                    <action selector="signUp:" destination="BYZ-38-t0r" eventType="touchUpInside" id="AR2-Vb-BLf"/>
                                                 </connections>
                                             </button>
                                         </subviews>

@@ -6,6 +6,8 @@
 //  Copyright © 2017 Maria . All rights reserved.
 //
 
+/* Student Location Struct for Information about the students */
+
 import Foundation
 
 struct StudentLocation {

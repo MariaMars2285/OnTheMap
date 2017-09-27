@@ -8,6 +8,8 @@
 
 import UIKit
 
+/* Base class for MapViewController and ListViewController */
+
 class BaseViewController: UIViewController {
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
@@ -21,6 +23,7 @@ class BaseViewController: UIViewController {
         self.refresh(sender: nil)
     }
     
+    // Refresh action: Fetches the locations from the server and refreshes the screen.
     @IBAction func refresh(sender: UIBarButtonItem?) {
         self.refreshButton.isEnabled = false
         self.activityIndicator.startAnimating()
@@ -45,6 +48,7 @@ class BaseViewController: UIViewController {
         self.present(alert, animated: true, completion: nil)
     }
 
+    // Makes call to logout API and logs out of the screen on success.
     @IBAction func logout(sender: UIBarButtonItem?) {
         self.activityIndicator.startAnimating()
         StudentLocationAPI().logout { (success) in

@@ -12,13 +12,8 @@ class ListViewController: BaseViewController {
     
     @IBOutlet weak var tableView: UITableView!
   
-    
     override func refreshAnnotations() {
         self.tableView.reloadData()
-    }
-    
-    @IBAction func pinLocation(sender: UIBarButtonItem?) {
-    
     }
     
 }

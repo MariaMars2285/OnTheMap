@@ -19,38 +19,36 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     var userId: String!
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-    }
-  
-    @IBAction func signUpButton(_ sender: UIButton!) {
-        
+   
+    // Sign Up Action: Takes user to Udacity Sign up page
+    @IBAction func signUp(_ sender: UIButton!) {
         UIApplication.shared.open(URL(string: "http://www.udacity.com/account/auth#!/signup")!, options: [:], completionHandler: nil)
-
     }
     
+    // Login Action: Validates Email and Password and creates Udacity session by making appropriate API Call.
     @IBAction func loginAction(_ sender: Any) {
-        
         guard let email = emailField.text, let password = passwordField.text else {
+            self.showLoginEmptyAlert()
             return
         }
-        
         if email == "" || password == "" {
+            self.showLoginEmptyAlert()
             return
         }
-        
         doLogin(email: email, password: password)
     }
     
-    func showLoginErrorAlert() {
-        DispatchQueue.main.async {
-            let alert = UIAlertController.errorAlert(title: "Login Error", message: "Login Failed! Please try again!!")
-            self.present(alert, animated: true, completion: nil)
-        }
+    func showLoginEmptyAlert() {
+        let alert = UIAlertController.errorAlert(title: "Login Error", message: "Email and Password should not be empty.")
+        self.present(alert, animated: true, completion: nil)
     }
     
+    func showLoginErrorAlert() {
+        let alert = UIAlertController.errorAlert(title: "Login Error", message: "Login Failed! Please try again!!")
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    // Makes a API call to create new session and on success takes user to the data view.
     func doLogin(email: String, password: String) {
         self.activityIndicator.startAnimating()
         StudentLocationAPI().login(withUserEmail: email, andPassword: password)
@@ -61,7 +59,7 @@ class LoginViewController: UIViewController {
                     self.showLoginErrorAlert()
                     return
                 }
-                print("login done")
+                
                 if self.parseData(fromData: data!) {
                     self.loggedIn()
                 } else {
@@ -71,6 +69,7 @@ class LoginViewController: UIViewController {
         }
     }
     
+    // Parses the user data and gets the user id.
     func parseData(fromData data: Data) -> Bool {
         
         do {

@@ -26,6 +26,7 @@ class AppModel {
     
     private init() { }
     
+    // Calls the Student Location API to get all the student details and stores it in an array.
     func fetchLocations(completionHandler: ((Bool) -> Void)?) {
         StudentLocationAPI().fetchLocations { (locations, error) in
             if error != nil || locations == nil {

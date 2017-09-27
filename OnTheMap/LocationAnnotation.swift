@@ -9,6 +9,7 @@
 import Foundation
 import MapKit
 
+/* Annotation for representing the Student Location Information */
 class LocationAnnotation: NSObject, MKAnnotation {
     
     public var title: String?

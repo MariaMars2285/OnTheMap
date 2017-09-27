@@ -11,6 +11,7 @@ import UIKit
 
 class StudentLocationAPI {
     
+    // Returns a configured NSMutableURLRequest for post requests.
     func getPostRequest(url: String, body: Data) -> NSMutableURLRequest {
         let request = NSMutableURLRequest(url: URL(string: url)!)
         request.httpMethod = "POST"
@@ -20,6 +21,7 @@ class StudentLocationAPI {
         return request
     }
     
+    // Returns a configured NSMutableURLRequest for get requests.
     func getRequest(url: String) -> NSMutableURLRequest {
         let request = NSMutableURLRequest(url: URL(string: url)!)
         request.addValue("QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr", forHTTPHeaderField: "X-Parse-Application-Id")
@@ -27,6 +29,7 @@ class StudentLocationAPI {
         return request
     }
     
+    // Login API call.
     func login(withUserEmail email: String, andPassword password: String, completionHandler: ((_ data: Data?, _ error: Error?) -> Void)?) {
         
         var postDict: [String: Any?] = [:]
@@ -55,6 +58,7 @@ class StudentLocationAPI {
         
     }
     
+    // Add Location API call.
     func addLocation(_ data: Data, completionHandler: ((_ succeeded: Bool) -> Void)?) {
         let request = getPostRequest(url: "https://parse.udacity.com/parse/classes/StudentLocation", body: data)
         request.addValue("QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr", forHTTPHeaderField: "X-Parse-Application-Id")
@@ -73,6 +77,7 @@ class StudentLocationAPI {
         task.resume()
     }
     
+    // Parse the student location from the response.
     func parseLocation(fromData data: Data) -> [StudentLocation]? {
         
         var studentLocations: [StudentLocation] = []
@@ -100,6 +105,7 @@ class StudentLocationAPI {
     }
     
     
+    //Fetch Locations API call.
     func fetchLocations(completionHandler: (([StudentLocation]?, Error? ) -> Void)?) {
         let request = getRequest(url: "https://parse.udacity.com/parse/classes/StudentLocation?limit=100&order=-updatedAt")
         let session = URLSession.shared
@@ -118,6 +124,7 @@ class StudentLocationAPI {
         task.resume()
     }
     
+    // Logout API call.
     func logout(completionHandler: @escaping (Bool) -> Void) {
         let request = NSMutableURLRequest(url: URL(string: "https://www.udacity.com/api/session")!)
         request.httpMethod = "DELETE"
@@ -140,6 +147,7 @@ class StudentLocationAPI {
         task.resume()
     }
     
+    // Get User Details API Call.
     func getUserDetails(userId: String, completionHandler: (([String: Any]?) -> Void)?) {
         let request = NSMutableURLRequest(url: URL(string: "https://www.udacity.com/api/users/\(userId)")!)
         let session = URLSession.shared

@@ -18,31 +18,21 @@ class InformationPostingViewController: UIViewController {
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
-
-    func showErrorAlert() {
-        let alert = UIAlertController(title: "Error", message: "Geocode Error. Please try later!", preferredStyle: .alert)
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
-        }
-        alert.addAction(cancelAction)
-        self.present(alert, animated: true, completion: nil)
-    }
-    
-    func showEmptyAlert() {
-        let alert = UIAlertController(title: "No Error", message: "Empty. Please try later!", preferredStyle: .alert)
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
-        }
-        alert.addAction(cancelAction)
-        self.present(alert, animated: true, completion: nil)
-    }
-    
+    // Dismiss the current navigation controller.
     @IBAction func cancel(sender: UIBarButtonItem!) {
         self.navigationController?.dismiss(animated: true, completion: nil)
     }
     
+    func showAlert(title: String, message: String) {
+        let alert = UIAlertController.errorAlert(title: title, message: message)
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    // Find On Map action: takes location address and geocodes it. If geocoding succeeds, it takes to next screen.
     @IBAction func findOnMap(sender: UIButton!) {
         
         if locationField.text == nil || locationField.text == "" {
-            self.showEmptyAlert()
+            self.showAlert(title: "Error", message: "Location Field cannot be empty!")
             return;
         }
         self.activityIndicator.startAnimating()
@@ -54,22 +44,19 @@ class InformationPostingViewController: UIViewController {
                 self.activityIndicator.stopAnimating()
             }
             if error != nil {
-                let alert = UIAlertController.errorAlert(title: "Error", message: "Error. Please try again!")
-                self.present(alert, animated: true, completion: nil)
+                self.showAlert(title: "Error", message: "Geocode Error. Please try later!")
                 return
             }
             
             if placemarks == nil {
-                let alert = UIAlertController.errorAlert(title: "Placemark Error", message: "Placemark Error. Please try again!")
-                self.present(alert, animated: true, completion: nil)
+                self.showAlert(title: "Error", message: "Placemark Error. Please try later!")
                 return
             }
             
             let first = placemarks?.first
             
             if first == nil {
-                let alert = UIAlertController.errorAlert(title: "Empty Error", message: "Empty. Please try again later!")
-                self.present(alert, animated: true, completion: nil)
+                self.showAlert(title: "Error", message: "Placemark Error. Please try later!")
                 return
             }
             
