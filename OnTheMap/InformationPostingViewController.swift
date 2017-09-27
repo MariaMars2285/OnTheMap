@@ -15,6 +15,8 @@ class InformationPostingViewController: UIViewController {
     var placemark: CLPlacemark!
     
     @IBOutlet weak var locationField: UITextField!
+    
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
 
     func showErrorAlert() {
@@ -33,36 +35,44 @@ class InformationPostingViewController: UIViewController {
         self.present(alert, animated: true, completion: nil)
     }
     
+    @IBAction func cancel(sender: UIBarButtonItem!) {
+        self.navigationController?.dismiss(animated: true, completion: nil)
+    }
+    
     @IBAction func findOnMap(sender: UIButton!) {
+        
         if locationField.text == nil || locationField.text == "" {
             self.showEmptyAlert()
             return;
         }
+        self.activityIndicator.startAnimating()
         
         let address = locationField.text!
         
         geoCoder.geocodeAddressString(address) { (placemarks, error) in
+            DispatchQueue.main.async {
+                self.activityIndicator.stopAnimating()
+            }
             if error != nil {
-                self.showErrorAlert()
+                UIAlertController.errorAlert(title: "Error", message: "Error. Please try again!")
                 return
             }
             
             if placemarks == nil {
-                self.showErrorAlert()
+                UIAlertController.errorAlert(title: "Placemark Error", message: "Placemark Error. Please try again!")
                 return
             }
             
             let first = placemarks?.first
             
             if first == nil {
-                self.showErrorAlert()
+                UIAlertController.errorAlert(title: "Empty Error", message: "Empty. Please try again later!")
                 return
             }
             
             self.placemark = first
             print(self.placemark.location)
             print(self.placemark.country)
-
             self.performSegue(withIdentifier: "InfoPostSegue", sender: nil)
         }
     }
@@ -74,4 +84,11 @@ class InformationPostingViewController: UIViewController {
         }
     }
     
+}
+
+extension InformationPostingViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
 }

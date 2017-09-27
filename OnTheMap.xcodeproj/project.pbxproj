@@ -20,6 +20,9 @@
 		4C4D75E01F75A86100BD2869 /* InformationPostingSecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4D75DF1F75A86100BD2869 /* InformationPostingSecondViewController.swift */; };
 		4C9102AF1F70EB4300CC9411 /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9102AE1F70EB4300CC9411 /* AppModel.swift */; };
 		4C9102B11F7104F000CC9411 /* StudentLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9102B01F7104F000CC9411 /* StudentLocation.swift */; };
+		4CAD7C371F7AB6DD003CFF89 /* StudentLocationAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CAD7C361F7AB6DC003CFF89 /* StudentLocationAPI.swift */; };
+		4CAD7C391F7AFC81003CFF89 /* UIAlertControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CAD7C381F7AFC81003CFF89 /* UIAlertControllerExtensions.swift */; };
+		4CD884361F7BAAD00088FB4F /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD884351F7BAAD00088FB4F /* BaseViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +41,9 @@
 		4C4D75DF1F75A86100BD2869 /* InformationPostingSecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationPostingSecondViewController.swift; sourceTree = "<group>"; };
 		4C9102AE1F70EB4300CC9411 /* AppModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
 		4C9102B01F7104F000CC9411 /* StudentLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentLocation.swift; sourceTree = "<group>"; };
+		4CAD7C361F7AB6DC003CFF89 /* StudentLocationAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentLocationAPI.swift; sourceTree = "<group>"; };
+		4CAD7C381F7AFC81003CFF89 /* UIAlertControllerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlertControllerExtensions.swift; sourceTree = "<group>"; };
+		4CD884351F7BAAD00088FB4F /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,11 +91,14 @@
 				4C9102AE1F70EB4300CC9411 /* AppModel.swift */,
 				4C9102B01F7104F000CC9411 /* StudentLocation.swift */,
 				4C4B61861F5A77070078990C /* Main.storyboard */,
+				4CAD7C361F7AB6DC003CFF89 /* StudentLocationAPI.swift */,
+				4CAD7C381F7AFC81003CFF89 /* UIAlertControllerExtensions.swift */,
 				4C4D75DD1F75A81500BD2869 /* InformationPostingViewController.swift */,
 				4C4D75DF1F75A86100BD2869 /* InformationPostingSecondViewController.swift */,
 				4C349FFD1F71A8B5008307E7 /* MapViewController.swift */,
 				4C459FD11F7277790012312F /* LocationAnnotation.swift */,
 				4C349FFF1F71A8FC008307E7 /* ListViewController.swift */,
+				4CD884351F7BAAD00088FB4F /* BaseViewController.swift */,
 				4C4B61891F5A77070078990C /* Assets.xcassets */,
 				4C4B618B1F5A77070078990C /* LaunchScreen.storyboard */,
 				4C4B618E1F5A77070078990C /* Info.plist */,
@@ -175,10 +184,13 @@
 				4C4D75DE1F75A81500BD2869 /* InformationPostingViewController.swift in Sources */,
 				4C34A0001F71A8FC008307E7 /* ListViewController.swift in Sources */,
 				4C4B61831F5A77070078990C /* AppDelegate.swift in Sources */,
+				4CD884361F7BAAD00088FB4F /* BaseViewController.swift in Sources */,
 				4C459FD21F7277790012312F /* LocationAnnotation.swift in Sources */,
 				4C4D75E01F75A86100BD2869 /* InformationPostingSecondViewController.swift in Sources */,
+				4CAD7C391F7AFC81003CFF89 /* UIAlertControllerExtensions.swift in Sources */,
 				4C349FFE1F71A8B5008307E7 /* MapViewController.swift in Sources */,
 				4C9102AF1F70EB4300CC9411 /* AppModel.swift in Sources */,
+				4CAD7C371F7AB6DD003CFF89 /* StudentLocationAPI.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

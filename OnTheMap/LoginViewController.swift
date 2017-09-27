@@ -42,60 +42,56 @@ class LoginViewController: UIViewController {
         doLogin(email: email, password: password)
     }
     
-    func doLogin(email: String, password: String) {
-        self.activityIndicator.startAnimating()
-        let request = NSMutableURLRequest(url: URL(string: "https://www.udacity.com/api/session")!)
-        request.httpMethod = "POST"
-        request.addValue("application/json", forHTTPHeaderField: "Accept")
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = "{\"udacity\": {\"username\": \"\(email)\", \"password\": \"\(password)\"}}".data(using: String.Encoding.utf8)
-        let session = URLSession.shared
-        let task = session.dataTask(with: request as URLRequest) { data, response, error in
-            DispatchQueue.main.async {
-                self.activityIndicator.stopAnimating()
-            }
-            if error != nil { // Handle error…
-                return
-            }
-            let range = Range(5..<data!.count)
-            let newData = data?.subdata(in: range) /* subset response data! */
-            print(NSString(data: newData!, encoding: String.Encoding.utf8.rawValue)!)
-            
-            self.parseData(fromData: newData!)
-            
+    func showLoginErrorAlert() {
+        DispatchQueue.main.async {
+            let alert = UIAlertController.errorAlert(title: "Login Error", message: "Login Failed! Please try again!!")
+            self.present(alert, animated: true, completion: nil)
         }
-        task.resume()
-        
     }
     
-    func parseData(fromData data: Data) {
-        
-        do {
-        
-            let parsedData = try JSONSerialization.jsonObject(with: data, options: []) as! NSDictionary
-        
-        
-            if let dict = parsedData as? Dictionary<String, Any>  {
-                print(dict["account"] as Any)
-            
-                if let accountDict = dict["account"] as? Dictionary<String, Any> {
-                    print(accountDict["key"] as Any)
-                
-                    if let user_id = accountDict["key"] {
-                        AppModel.instance.userId = user_id as! String
-                        self.loggedIn()
-                    }
+    func doLogin(email: String, password: String) {
+        self.activityIndicator.startAnimating()
+        StudentLocationAPI().login(withUserEmail: email, andPassword: password)
+        { (data, error) in
+            DispatchQueue.main.async {
+                self.activityIndicator.stopAnimating()
+                if error != nil || data == nil {
+                    self.showLoginErrorAlert()
+                    return
+                }
+                print("login done")
+                if self.parseData(fromData: data!) {
+                    self.loggedIn()
+                } else {
+                    self.showLoginErrorAlert()
                 }
             }
-            print(AppModel.instance.userId)
-            print(parsedData)
-
+        }
+    }
+    
+    func parseData(fromData data: Data) -> Bool {
+        
+        do {
+            let parsedData = try JSONSerialization.jsonObject(with: data, options: []) as! NSDictionary
             
+            guard let dict = parsedData as? [String: Any] else {
+                return false
+            }
+            
+            guard let accountDict = dict["account"] as? [String: Any] else {
+                return false
+            }
+        
+            if let user_id = accountDict["key"] {
+                AppModel.instance.userId = user_id as! String
+                return true
+            } else {
+                return false
+            }
+        } catch {
+            print("Error")
+            return false
         }
-        catch {
-          print("Error")
-        }
-
     }
     
     func loggedIn() {

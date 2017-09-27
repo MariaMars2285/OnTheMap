@@ -9,23 +9,18 @@
 import UIKit
 import MapKit
 
-class MapViewController: UIViewController {
+class MapViewController: BaseViewController {
     
     @IBOutlet weak var mapView: MKMapView!
-    
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-        
-    @IBOutlet weak var pinLocation: UIBarButtonItem!
-    
-    @IBOutlet weak var refreshButton: UIBarButtonItem!
-    
+            
     var annotations: [LocationAnnotation] = []
-
 
     override func viewDidLoad() {
         super.viewDidLoad()
         if AppModel.instance.getCount() == 0 {
             self.refresh(sender: nil)
+        } else {
+            self.addAnnotations()
         }
     }
     
@@ -41,15 +36,8 @@ class MapViewController: UIViewController {
         }
     }
     
-    @IBAction func refresh(sender: UIBarButtonItem?) {
-        self.refreshButton.isEnabled = false
-        self.activityIndicator.startAnimating()
-        AppModel.instance.getLocations {
-            self.activityIndicator.stopAnimating()
-            self.refreshButton.isEnabled = true
-            self.addAnnotations()
-          
-        }
+    override func refreshAnnotations() {
+        self.addAnnotations()
     }
 }
 

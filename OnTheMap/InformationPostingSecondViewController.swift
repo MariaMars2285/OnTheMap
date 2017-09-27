@@ -28,10 +28,8 @@ class InformationPostingSecondViewController: UIViewController {
     }
     
     @IBAction func submitLink(_ sender: Any) {
-        DispatchQueue.main.async {
-            self.activityIndicator.startAnimating()
-            }
-        
+        self.activityIndicator.startAnimating()
+       
         let coordinate = placemark.location?.coordinate
         var postDict: [String: Any?] = [:]
         postDict["latitude"] = coordinate!.latitude
@@ -40,38 +38,23 @@ class InformationPostingSecondViewController: UIViewController {
         postDict["mapString"] = self.mapString
         postDict["firstName"] = "Maria"
         postDict["lastName"] = "Selvam"
+        postDict["uniqueKey"] = AppModel.instance.userId
         
         if let jsonData = try? JSONSerialization.data(withJSONObject: postDict, options: .prettyPrinted) {
-            print("5")
             addLocation(jsonData)
-            print("4")
             return
         }
     }
     
     func addLocation(_ data: Data) {
-        
-        let request = NSMutableURLRequest(url: URL(string: "https://parse.udacity.com/parse/classes/StudentLocation")!)
-        request.httpMethod = "POST"
-        request.addValue("QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr", forHTTPHeaderField: "X-Parse-Application-Id")
-        request.addValue("QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY", forHTTPHeaderField: "X-Parse-REST-API-Key")
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = data
-        let session = URLSession.shared
-        print("1")
-        let task = session.dataTask(with: request as URLRequest) { data, response, error in
-            print("2")
+        StudentLocationAPI().addLocation(data) { (succeeded) in
             DispatchQueue.main.async {
                 self.activityIndicator.stopAnimating()
-                self.navigationController?.dismiss(animated: true, completion: nil)
+                if (succeeded) {
+                    self.navigationController?.dismiss(animated: true, completion: nil)
+                }
             }
-            if error != nil { // Handle error…
-                return
-            }
-            print(NSString(data: data!, encoding: String.Encoding.utf8.rawValue)!)
         }
-        print("3")
-        task.resume()
     }
 }
 

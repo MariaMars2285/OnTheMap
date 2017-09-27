@@ -8,39 +8,24 @@
 
 import UIKit
 
-class ListViewController: UIViewController {
-
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+class ListViewController: BaseViewController {
     
     @IBOutlet weak var tableView: UITableView!
-    
-    @IBOutlet weak var pinLocation: UIBarButtonItem!
-    
-    @IBOutlet weak var refreshButton: UIBarButtonItem!
-    
+        
     override func viewDidLoad() {
         if AppModel.instance.getCount() == 0 {
             self.refresh(sender: nil)
         }
     }
     
-    @IBAction func refresh(sender: UIBarButtonItem?) {
-        self.refreshButton.isEnabled = false
-        self.activityIndicator.startAnimating()
-        AppModel.instance.getLocations {
-            self.activityIndicator.stopAnimating()
-            self.tableView.reloadData()
-            self.refreshButton.isEnabled = true
-        }
+    override func refreshAnnotations() {
+        self.tableView.reloadData()
     }
     
     @IBAction func pinLocation(sender: UIBarButtonItem?) {
     
     }
     
-    @IBAction func logout(sender: UIBarButtonItem?) {
-    
-    }
 }
 
 extension ListViewController: UITableViewDataSource {
