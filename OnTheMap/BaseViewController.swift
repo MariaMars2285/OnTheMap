@@ -54,7 +54,7 @@ class BaseViewController: UIViewController {
         StudentLocationAPI().logout { (success) in
             DispatchQueue.main.async {
                 if success {
-                    self.performSegue(withIdentifier: "logoutSegue", sender: nil)
+                    self.tabBarController?.dismiss(animated: true, completion: nil)
                 } else {
                     let alert = UIAlertController.errorAlert(title: "logoutError", message: "Logout Failed!")
                     self.present(alert, animated: true, completion: nil)

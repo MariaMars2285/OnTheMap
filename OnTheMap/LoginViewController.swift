@@ -19,6 +19,12 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     var userId: String!
+    
+    /*override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        emailField.text = ""
+        passwordField.text = ""
+    }*/
    
     // Sign Up Action: Takes user to Udacity Sign up page
     @IBAction func signUp(_ sender: UIButton!) {
