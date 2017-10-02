@@ -79,3 +79,10 @@ extension InformationPostingSecondViewController: MKMapViewDelegate {
         return view
     }
 }
+
+extension InformationPostingSecondViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+}
