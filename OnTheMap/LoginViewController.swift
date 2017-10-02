@@ -58,48 +58,20 @@ class LoginViewController: UIViewController {
     func doLogin(email: String, password: String) {
         self.activityIndicator.startAnimating()
         StudentLocationAPI().login(withUserEmail: email, andPassword: password)
-        { (data, error) in
+        { (userId, error) in
             DispatchQueue.main.async {
                 self.activityIndicator.stopAnimating()
-                if error != nil || data == nil {
+                if error != nil || userId == nil {
                     self.showLoginErrorAlert()
                     return
                 }
-                
-                if self.parseData(fromData: data!) {
-                    self.loggedIn()
-                } else {
-                    self.showLoginErrorAlert()
-                }
+                AppModel.instance.userId = userId
+                self.loggedIn()
             }
         }
     }
     
-    // Parses the user data and gets the user id.
-    func parseData(fromData data: Data) -> Bool {
-        
-        do {
-            let parsedData = try JSONSerialization.jsonObject(with: data, options: []) as! NSDictionary
-            
-            guard let dict = parsedData as? [String: Any] else {
-                return false
-            }
-            
-            guard let accountDict = dict["account"] as? [String: Any] else {
-                return false
-            }
-        
-            if let user_id = accountDict["key"] {
-                AppModel.instance.userId = user_id as! String
-                return true
-            } else {
-                return false
-            }
-        } catch {
-            print("Error")
-            return false
-        }
-    }
+    
     
     func loggedIn() {
         self.performSegue(withIdentifier: "MainSegue", sender: nil)

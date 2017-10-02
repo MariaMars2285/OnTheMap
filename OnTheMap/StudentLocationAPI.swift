@@ -29,8 +29,35 @@ class StudentLocationAPI {
         return request
     }
     
+    // Parses the user data and gets the user id.
+    func parseUserData(fromData data: Data) -> String? {
+        
+        do {
+            let parsedData = try JSONSerialization.jsonObject(with: data, options: []) as! NSDictionary
+            
+            guard let dict = parsedData as? [String: Any] else {
+                return nil
+            }
+            
+            guard let accountDict = dict["account"] as? [String: Any] else {
+                return nil
+            }
+            
+            if let userId = accountDict["key"] {
+                //AppModel.instance.userId = user_id as! String
+                return userId as? String
+            } else {
+                return nil
+            }
+        } catch {
+            print("Error")
+            return nil
+        }
+    }
+    
     // Login API call.
-    func login(withUserEmail email: String, andPassword password: String, completionHandler: ((_ data: Data?, _ error: Error?) -> Void)?) {
+    func login(withUserEmail email: String, andPassword password: String,
+               completionHandler: ((_ data: String?, _ error: Error?) -> Void)?) {
         
         var postDict: [String: Any?] = [:]
         postDict["username"] = email
@@ -52,7 +79,9 @@ class StudentLocationAPI {
             let range = Range(5..<data!.count)
             let newData = data?.subdata(in: range) /* subset response data! */
             print(NSString(data: newData!, encoding: String.Encoding.utf8.rawValue)!)
-            completionHandler?(newData,nil)
+            let userId = self.parseUserData(fromData: newData!)
+            completionHandler?(userId,nil)
+            
         }
         task.resume()
         
@@ -103,6 +132,7 @@ class StudentLocationAPI {
         }
         return studentLocations
     }
+    
     
     
     //Fetch Locations API call.
