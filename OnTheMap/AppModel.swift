@@ -33,6 +33,7 @@ class AppModel {
                 DispatchQueue.main.async {
                     completionHandler?(false)
                 }
+                return
             }
             self.studentLocations = locations!
             DispatchQueue.main.async {

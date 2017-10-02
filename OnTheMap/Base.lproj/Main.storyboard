@@ -305,9 +305,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="6dN-c6-PJn">
-                                <rect key="frame" x="0.0" y="63" width="375" height="553"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="6dN-c6-PJn">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
                                 <connections>
                                     <outlet property="delegate" destination="h9u-rk-fP5" id="Red-FG-7YQ"/>
                                 </connections>
@@ -318,9 +317,13 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="6dN-c6-PJn" firstAttribute="top" secondItem="Mur-Mk-pDx" secondAttribute="top" id="Fda-Bd-gDI"/>
                             <constraint firstAttribute="trailingMargin" secondItem="7yB-72-bn5" secondAttribute="trailing" id="Kck-JA-GGR"/>
+                            <constraint firstItem="6dN-c6-PJn" firstAttribute="leading" secondItem="Mur-Mk-pDx" secondAttribute="leading" id="Rd1-r3-01B"/>
                             <constraint firstItem="7yB-72-bn5" firstAttribute="top" secondItem="MrR-KR-jZC" secondAttribute="bottom" id="VeU-w8-3Cq"/>
                             <constraint firstItem="C4N-MW-TGB" firstAttribute="top" secondItem="7yB-72-bn5" secondAttribute="bottom" id="XKd-qG-az2"/>
+                            <constraint firstAttribute="trailing" secondItem="6dN-c6-PJn" secondAttribute="trailing" id="gZ7-jE-QAM"/>
+                            <constraint firstItem="C4N-MW-TGB" firstAttribute="top" secondItem="6dN-c6-PJn" secondAttribute="bottom" id="gbM-aD-CY3"/>
                             <constraint firstItem="7yB-72-bn5" firstAttribute="leading" secondItem="Mur-Mk-pDx" secondAttribute="leadingMargin" id="yHj-Gd-ACl"/>
                         </constraints>
                     </view>
@@ -599,7 +602,7 @@ IAo
                             </barButtonItem>
                             <barButtonItem image="icon_pin" id="0nc-CW-z7g">
                                 <connections>
-                                    <action selector="pinLocationWithSender:" destination="vL3-ZJ-zmJ" id="ipt-Md-thp"/>
+                                    <segue destination="Gbe-7u-blt" kind="showDetail" identifier="AddLocation" action="showViewController:sender:" id="Acc-nh-JmZ"/>
                                 </connections>
                             </barButtonItem>
                         </rightBarButtonItems>
@@ -662,6 +665,7 @@ IAo
         <image name="icon_refresh" width="24" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="Acc-nh-JmZ"/>
         <segue reference="HlM-I8-DnO"/>
     </inferredMetricsTieBreakers>
 </document>
