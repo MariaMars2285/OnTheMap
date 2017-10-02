@@ -96,7 +96,7 @@ class StudentLocationAPI {
         let session = URLSession.shared
         let task = session.dataTask(with: request as URLRequest) { data, response, error in
             if error != nil {
-                completionHandler?(false)// Handle error…
+                completionHandler?(false)
                 return
             }
             

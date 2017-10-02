@@ -20,11 +20,11 @@ class LoginViewController: UIViewController {
     
     var userId: String!
     
-    /*override func viewWillAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         emailField.text = ""
         passwordField.text = ""
-    }*/
+    }
    
     // Sign Up Action: Takes user to Udacity Sign up page
     @IBAction func signUp(_ sender: UIButton!) {
@@ -54,6 +54,11 @@ class LoginViewController: UIViewController {
         self.present(alert, animated: true, completion: nil)
     }
     
+    func showIncorrectCredentialsAlert() {
+        let alert = UIAlertController.errorAlert(title: "Login Failed Error", message: "Incorrect Username or Password! Please try again!!")
+        self.present(alert, animated: true, completion: nil)
+    }
+    
     // Makes a API call to create new session and on success takes user to the data view.
     func doLogin(email: String, password: String) {
         self.activityIndicator.startAnimating()
@@ -61,8 +66,11 @@ class LoginViewController: UIViewController {
         { (userId, error) in
             DispatchQueue.main.async {
                 self.activityIndicator.stopAnimating()
-                if error != nil || userId == nil {
+                if error != nil  {
                     self.showLoginErrorAlert()
+                    return
+                } else if userId == nil {
+                    self.showIncorrectCredentialsAlert()
                     return
                 }
                 AppModel.instance.userId = userId

@@ -31,6 +31,12 @@ class InformationPostingSecondViewController: UIViewController {
     }
     
     
+    func showErrorAlert() {
+        let alert = UIAlertController.errorAlert(title: "Add Location Error", message: "Could not add the location. Please try again later!")
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    
     @IBAction func submitLink(_ sender: Any) {
         self.activityIndicator.startAnimating()
        
@@ -57,6 +63,8 @@ class InformationPostingSecondViewController: UIViewController {
                 self.activityIndicator.stopAnimating()
                 if (succeeded) {
                     self.navigationController?.dismiss(animated: true, completion: nil)
+                } else {
+                    self.showErrorAlert()
                 }
             }
         }
